@@ -1,4 +1,40 @@
+
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
+
+    <div class="row">
+        <div class="col">
+            {{ form_row(form.cin) }}
+        </div></div>
+        <div class="row">
+        <div class="col">
+            {{ form_row(form.nom) }}
+        </div></div>
+        <div class="row">
+        <div class="col">
+            {{ form_row(form.tel) }}
+        </div></div>
+        <div class="row">
+        <div class="col">
+            {{ form_row(form.mail) }}
+        </div></div>
+        <div class="row">
+        <div class="col">
+            {{ form_row(form.adr) }}
+        </div></div>
+        <div class="row">
+        <div class="col">
+            {{ form_row(form.user.login) }}
+        </div></div>
+        <div class="row">
+        <div class="col">
+            {{ form_row(form.user.password) }}
+        </div></div>
+        <div class="row">
+        <div class="col">
+        <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+        <a href="{{ path('app_client_index') }}" class="btn btn-primary">back to list</a>
+    </div></div>
+    {{ form_end(form, {render_rest: false}) }}
