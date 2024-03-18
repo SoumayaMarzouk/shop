@@ -4,10 +4,15 @@
 
 {% block body %}
     <h1>Edit Fournisseur</h1>
-
+<div class="container">
     {{ include('fournisseur/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_fournisseur_index') }}">back to list</a>
+    <div class="container">
+        <div class="row mt-4 ">
+            <div class="col-1">
+            <a href="{{ path('app_fournisseur_index') }}" class="btn btn-primary">Back</a>
+            </div><div class="col-1">
+                {{ include('fournisseur/_delete_form.html.twig') }}
+        </div></div></div></div>
 
-    {{ include('fournisseur/_delete_form.html.twig') }}
 {% endblock %}

@@ -3,15 +3,15 @@
 {% block title %}Fournisseur index{% endblock %}
 
 {% block body %}
-    <h1>Fournisseur index</h1>
-
+    <h1>Liste Fournisseurs</h1>
+<div class="container">
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Nom</th>
-                <th>Tel</th>
-                <th>actions</th>
+                <th>Telephone</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,8 +21,8 @@
                 <td>{{ fournisseur.nom }}</td>
                 <td>{{ fournisseur.tel }}</td>
                 <td>
-                    <a href="{{ path('app_fournisseur_show', {'id': fournisseur.id}) }}">show</a>
-                    <a href="{{ path('app_fournisseur_edit', {'id': fournisseur.id}) }}">edit</a>
+                    <a href="{{ path('app_fournisseur_show', {'id': fournisseur.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('app_fournisseur_edit', {'id': fournisseur.id}) }}" class="btn btn-success">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,6 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_fournisseur_new') }}">Create new</a>
+    <a href="{{ path('app_fournisseur_new') }}" class="btn btn-primary">Create new</a>
+    </div>
 {% endblock %}

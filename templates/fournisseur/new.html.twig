@@ -4,8 +4,9 @@
 
 {% block body %}
     <h1>Create new Fournisseur</h1>
-
+<div class="container">
     {{ include('fournisseur/_form.html.twig') }}
 
-    <a href="{{ path('app_fournisseur_index') }}">back to list</a>
+    <a href="{{ path('app_fournisseur_index') }}" class="btn btn-primary">back to list</a>
+    </div>
 {% endblock %}
