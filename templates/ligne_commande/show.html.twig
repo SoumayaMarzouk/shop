@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>LigneCommande</h1>
-
+<div class="container">
     <table class="table">
         <tbody>
             <tr>
@@ -12,15 +12,24 @@
                 <td>{{ ligne_commande.id }}</td>
             </tr>
             <tr>
-                <th>Qt</th>
+                <th>Produit</th>
+                <td>{{ ligne_commande.produit }}</td>
+            </tr>
+            <tr>
+                <th>Quantité</th>
                 <td>{{ ligne_commande.qt }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_ligne_commande_index') }}">back to list</a>
+    <div class="row">
+        <div class="col-1">
+        <a href="{{ path('app_commande_show', {'id': ligne_commande.commande.id}) }}" class="btn btn-primary">Back</a>
+        </div><div class="col-1">
+        <a href="{{ path('app_ligne_commande_edit', {'id': ligne_commande.id}) }}" class="btn btn-success">Edit</a>
+        </div><div class="col-1">
+            {{ include('ligne_commande/_delete_form.html.twig') }}
+        </div></div></div>
 
-    <a href="{{ path('app_ligne_commande_edit', {'id': ligne_commande.id}) }}">edit</a>
 
-    {{ include('ligne_commande/_delete_form.html.twig') }}
 {% endblock %}

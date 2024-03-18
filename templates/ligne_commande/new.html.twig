@@ -7,5 +7,5 @@
 
     {{ include('ligne_commande/_form.html.twig') }}
 
-    <a href="{{ path('app_ligne_commande_index') }}">back to list</a>
+    <a href="{{ path('app_commande_show', {'id': ligne_commande.commande.id}) }}" class="btn btn-primary">Back</a>
 {% endblock %}

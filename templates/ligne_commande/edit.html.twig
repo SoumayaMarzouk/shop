@@ -7,7 +7,12 @@
 
     {{ include('ligne_commande/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_ligne_commande_index') }}">back to list</a>
+    <div class="container">
+        <div class="row mt-4 ">
+            <div class="col-1">
+                <a href="{{ path('app_commande_show', {'id': ligne_commande.commande.id}) }}" class="btn btn-primary">Back</a>
+            </div><div class="col-1">
+                {{ include('ligne_commande/_delete_form.html.twig') }}
+        </div></div></div></div>
 
-    {{ include('ligne_commande/_delete_form.html.twig') }}
 {% endblock %}

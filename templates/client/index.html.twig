@@ -1,19 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Client index{% endblock %}
+{% block title %}Liste Client{% endblock %}
 
 {% block body %}
-    <h1>Client index</h1>
-
+    <h1>Liste Client</h1>
+<div class="container">
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Cin</th>
+                <th>CIN</th>
                 <th>Nom</th>
-                <th>Tel</th>
+                <th>Telephone</th>
                 <th>Mail</th>
-                <th>Adr</th>
+                <th>Adresse</th>
+                <th>Login</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -26,9 +27,10 @@
                 <td>{{ client.tel }}</td>
                 <td>{{ client.mail }}</td>
                 <td>{{ client.adr }}</td>
+                <td>{{ client.user }}</td>
                 <td>
-                    <a href="{{ path('app_client_show', {'id': client.id}) }}">show</a>
-                    <a href="{{ path('app_client_edit', {'id': client.id}) }}">edit</a>
+                    <a href="{{ path('app_client_show', {'id': client.id}) }}" class="btn btn-info">show</a>
+                    <a href="{{ path('app_client_edit', {'id': client.id}) }}" class="btn btn-success">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -39,5 +41,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_client_new') }}">Create new</a>
+    <a href="{{ path('app_client_new') }}" class="btn btn-primary">Create new</a>
 {% endblock %}

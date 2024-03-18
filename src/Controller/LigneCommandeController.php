@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\LigneCommande;
+use App\Entity\Commande;
 use App\Form\LigneCommandeType;
 use App\Repository\LigneCommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,6 +35,27 @@ class LigneCommandeController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_ligne_commande_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('ligne_commande/new.html.twig', [
+            'ligne_commande' => $ligneCommande,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/new/{id}', name: 'app_ligne_commande_new_inCommande', methods: ['GET', 'POST'])]
+    public function newInCommande(Request $request, EntityManagerInterface $entityManager, Commande $c): Response
+    {
+        $ligneCommande = new LigneCommande();
+        $ligneCommande->setCommande($c);
+        $form = $this->createForm(LigneCommandeType::class, $ligneCommande);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($ligneCommande);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_commande_show', ['id' => $c->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('ligne_commande/new.html.twig', [

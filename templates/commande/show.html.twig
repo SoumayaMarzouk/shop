@@ -4,23 +4,72 @@
 
 {% block body %}
     <h1>Commande</h1>
-
+<div class="container">
     <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ commande.id }}</td>
+                
             </tr>
             <tr>
                 <th>Date</th>
                 <td>{{ commande.date ? commande.date|date('Y-m-d') : '' }}</td>
             </tr>
+            <tr>
+                <th>Client</th>
+                <td>{{ commande.client }}</td>
+                
+            </tr>
+
+           
         </tbody>
     </table>
 
-    <a href="{{ path('app_commande_index') }}">back to list</a>
+    <div class="row">
+        <div class="col-1">
+        <a href="{{ path('app_commande_index') }}" class="btn btn-primary">Back</a>
+        </div><div class="col-1">
+        <a href="{{ path('app_commande_edit', {'id': commande.id}) }}" class="btn btn-success">Edit</a>
+        </div><div class="col-1">
+            {{ include('commande/_delete_form.html.twig') }}
+        </div></div></div>
+        <div class="container mt-4"></div>
+        <h3>Liste des produits</h3>
+        <div class="container mt-4">
 
-    <a href="{{ path('app_commande_edit', {'id': commande.id}) }}">edit</a>
+           
 
-    {{ include('commande/_delete_form.html.twig') }}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Produit</th>
+                        <th>Quantité</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for ligne_commande in commande.ligneCommandes %}
+                    <tr>
+                        <td>{{ ligne_commande.id }}</td>
+                        <td>{{ ligne_commande.produit }}</td>
+                        <td>{{ ligne_commande.qt }}</td>
+                        <td>
+                            <a href="{{ path('app_ligne_commande_show', {'id': ligne_commande.id}) }}" class="btn btn-info">show</a>
+                            <a href="{{ path('app_ligne_commande_edit', {'id': ligne_commande.id}) }}" class="btn btn-success">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        
+            <a href="{{ path('app_ligne_commande_new_inCommande',{ 'id': commande.id }) }}" class="btn btn-primary">Create new</a>
+        </div>
+
+ 
 {% endblock %}

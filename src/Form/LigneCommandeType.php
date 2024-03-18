@@ -16,13 +16,9 @@ class LigneCommandeType extends AbstractType
     {
         $builder
             ->add('qt')
-            ->add('commande', EntityType::class, [
-                'class' => Commande::class,
-                'choice_label' => 'id',
-            ])
             ->add('produit', EntityType::class, [
                 'class' => Produit::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
             ])
         ;
     }
