@@ -16,11 +16,6 @@ class FournisseurType extends AbstractType
         $builder
             ->add('nom')
             ->add('tel')
-            ->add('produit', EntityType::class, [
-                'class' => Produit::class,
-                'choice_label' => 'id',
-                'multiple' => true,
-            ])
         ;
     }
 

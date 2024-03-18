@@ -18,14 +18,14 @@ class ProduitType extends AbstractType
             ->add('libelle')
             ->add('description')
             ->add('prix')
-            ->add('qt')
+            ->add('qt',null, ['label' => 'Quantité'])
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
-                'choice_label' => 'id',
+                'choice_label' => 'libelle',
             ])
             ->add('fournisseurs', EntityType::class, [
                 'class' => Fournisseur::class,
-                'choice_label' => 'id',
+                'choice_label' => 'nom',
                 'multiple' => true,
             ])
         ;

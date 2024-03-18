@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Client;
+use App\Form\UserType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,11 +13,12 @@ class ClientType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('cin')
+            ->add('cin',null, ['label' => 'CIN'])
             ->add('nom')
-            ->add('tel')
+            ->add('tel',null, ['label' => 'Téléphone'])
             ->add('mail')
-            ->add('adr')
+            ->add('adr',null, ['label' => 'Adresse'])
+            ->add('user', UserType::class)
         ;
     }
 
