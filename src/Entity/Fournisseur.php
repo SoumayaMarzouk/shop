@@ -6,8 +6,10 @@ use App\Repository\FournisseurRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: FournisseurRepository::class)]
+#[UniqueEntity('nom')]
 class Fournisseur
 {
     #[ORM\Id]
@@ -19,7 +21,12 @@ class Fournisseur
     private ?string $nom = null;
 
     #[ORM\Column]
-    private ?int $tel = null;
+    #[Assert\Range(
+        min: 10000000,
+        max: 99999999,
+        notInRangeMessage: 'Le néméro de téléphone doit contenir exactement 8 chiffres',
+    )]
+   private ?int $tel = null;
 
     #[ORM\ManyToMany(targetEntity: Produit::class, inversedBy: 'fournisseurs')]
     private Collection $produit;

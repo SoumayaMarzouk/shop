@@ -6,8 +6,10 @@ use App\Repository\ClientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
+#[UniqueEntity('cin')]
 class Client
 {
     #[ORM\Id]
@@ -16,15 +18,28 @@ class Client
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\Range(
+        min: 10000000,
+        max: 99999999,
+        notInRangeMessage: 'Le CIN doit contenir exactement 8 chiffres',
+    )]
     private ?int $cin = null;
 
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Range(
+        min: 10000000,
+        max: 99999999,
+        notInRangeMessage: 'Le néméro de téléphone doit contenir exactement 8 chiffres',
+    )]
     private ?int $tel = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    )]
     private ?string $mail = null;
 
     #[ORM\Column(length: 255, nullable: true)]

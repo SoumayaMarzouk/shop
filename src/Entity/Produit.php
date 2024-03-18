@@ -6,8 +6,10 @@ use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
+#[UniqueEntity('libelle')]
 class Produit
 {
     #[ORM\Id]
@@ -22,9 +24,11 @@ class Produit
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\Positive]
     private ?float $prix = null;
 
     #[ORM\Column]
+    #[Assert\PositiveOrZero]
     private ?float $qt = null;
 
     #[ORM\ManyToOne(inversedBy: 'produits')]
