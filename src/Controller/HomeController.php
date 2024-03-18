@@ -8,11 +8,18 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
+    #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        $user=$this->getUser();
+        if($user){
+        if(in_array('ROLE_ADMIN',$user->getRoles()))
+            return $this->redirectToRoute('app_user_index');
+        else if(in_array('ROLE_USER',$user->getRoles()))
+            return $this->redirectToRoute('app_commande_index');
+        }
+        else
+            return $this->redirectToRoute('app_login');
+      
     }
 }
