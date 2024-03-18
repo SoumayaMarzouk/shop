@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-1">
+            Recherche par Nom : </div>
+            <div class="col-3">{{ form_widget(form.nom) }}
+        </div>
+        <div class="col-1">
+        <button class="btn btn-success">{{ button_label|default('Recherche') }}</button>
+        
+    </div></div>
+    {{ form_end(form) }}

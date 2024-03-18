@@ -34,6 +34,11 @@
         </div></div>
         <div class="row">
         <div class="col">
+            {{ form_row(form._token) }}
+        </div></div>
+      
+        <div class="row">
+        <div class="col">
         <button class="btn btn-success">{{ button_label|default('Save') }}</button>
         <a href="{{ path('app_client_index') }}" class="btn btn-primary">back to list</a>
     </div></div>
