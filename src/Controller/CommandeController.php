@@ -10,15 +10,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
+use Knp\Component\Pager\PaginatorInterface;
 #[Route('/commande')]
 class CommandeController extends AbstractController
 {
     #[Route('/', name: 'app_commande_index', methods: ['GET'])]
-    public function index(CommandeRepository $commandeRepository): Response
+    public function index(CommandeRepository $commandeRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $pagination = $paginator->paginate(
+            $commandeRepository->findAll(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            5 /*limit per page*/
+        );
+        
         return $this->render('commande/index.html.twig', [
-            'commandes' => $commandeRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 
