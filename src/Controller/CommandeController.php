@@ -11,14 +11,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Knp\Component\Pager\PaginatorInterface;
+use App\Entity\User;
+use App\Repository\ClientRepository;
+use Symfony\Component\Security\Http\Attribute\CurrentUser;
 #[Route('/commande')]
 class CommandeController extends AbstractController
 {
     #[Route('/', name: 'app_commande_index', methods: ['GET'])]
-    public function index(CommandeRepository $commandeRepository, PaginatorInterface $paginator, Request $request): Response
+    public function index(#[CurrentUser] ?User $user,ClientRepository $clientRepository, CommandeRepository $commandeRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        if($this->isGranted('ROLE_ADMIN'))
+            $query=$commandeRepository->findAll();
+        else{
+            $client=$clientRepository->findOneBy(array('user' => $user));
+            $query=$commandeRepository->findBy(array('client' => $client));
+        }
         $pagination = $paginator->paginate(
-            $commandeRepository->findAll(), /* query NOT result */
+            $query,
             $request->query->getInt('page', 1), /*page number*/
             5 /*limit per page*/
         );
@@ -29,13 +38,17 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/new', name: 'app_commande_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(#[CurrentUser] ?User $user,ClientRepository $clientRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $commande = new Commande();
+        $commande->setDate(new \DateTime());
         $form = $this->createForm(CommandeType::class, $commande);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            if(!$this->isGranted('ROLE_ADMIN')){
+                $client=$clientRepository->findOneBy(array('user' =>$user));
+                $commande->setClient($client);
+            }
             $entityManager->persist($commande);
             $entityManager->flush();
 
