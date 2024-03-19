@@ -51,8 +51,15 @@ class CommandeController extends AbstractController
     #[Route('/{id}', name: 'app_commande_show', methods: ['GET'])]
     public function show(Commande $commande): Response
     {
+        $produits=$commande->getLigneCommandes();
+        $total=0;
+        foreach ($produits as $p){
+            $qt=$p->getQt();
+            $prix=$p->getProduit()->getPrix();
+            $total+=$prix*$qt;
+        }
         return $this->render('commande/show.html.twig', [
-            'commande' => $commande,
+            'commande' => $commande, 'total' =>$total
         ]);
     }
 

@@ -5,6 +5,8 @@
 {% block body %}
     <h1>Commande</h1>
 <div class="container">
+    <div class="row">
+        <div class="col">
     <table class="table">
         <tbody>
             <tr>
@@ -21,11 +23,19 @@
                 <td>{{ commande.client }}</td>
                 
             </tr>
-
-           
         </tbody>
     </table>
-
+</div>
+<div class="col">
+    <div class="container">
+        <div class="card text-white bg-success mb-3" style="max-width: 20rem;">
+            <div class="card-header">Total de la commande</div>
+            <div class="card-body">
+              <h4 class="card-title">{{total}} dinars</h4>
+              </div>
+          </div>
+        </div>
+</div></div>
     <div class="row">
         <div class="col-1">
         <a href="{{ path('app_commande_index') }}" class="btn btn-primary">Back</a>
@@ -37,14 +47,12 @@
         <div class="container mt-4"></div>
         <h3>Liste des produits</h3>
         <div class="container mt-4">
-
-           
-
             <table class="table">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Produit</th>
+                        <th>Prix (dinars)</th>
                         <th>Quantité</th>
                         <th>Actions</th>
                     </tr>
@@ -53,7 +61,8 @@
                 {% for ligne_commande in commande.ligneCommandes %}
                     <tr>
                         <td>{{ ligne_commande.id }}</td>
-                        <td>{{ ligne_commande.produit }}</td>
+                        <td>{{ ligne_commande.produit.libelle }}</td>
+                        <td>{{ ligne_commande.produit.prix }}</td>
                         <td>{{ ligne_commande.qt }}</td>
                         <td>
                             <a href="{{ path('app_ligne_commande_show', {'id': ligne_commande.id}) }}" class="btn btn-info">show</a>
@@ -67,7 +76,6 @@
                 {% endfor %}
                 </tbody>
             </table>
-        
             <a href="{{ path('app_ligne_commande_new_inCommande',{ 'id': commande.id }) }}" class="btn btn-primary">Create new</a>
         </div>
 
