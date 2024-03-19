@@ -19,7 +19,7 @@
             <tr>
                 <td>{{ commande.id }}</td>
                 <td>{{ commande.date ? commande.date|date('Y-m-d') : '' }}</td>
-                <td>{{ commande.client }}</td>
+                <td>{{ commande.client.nom }}</td>
                 <td>
                     <a href="{{ path('app_commande_show', {'id': commande.id}) }}" class="btn btn-info">show</a>
                     <a href="{{ path('app_commande_edit', {'id': commande.id}) }}" class="btn btn-success">edit</a>

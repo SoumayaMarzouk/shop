@@ -26,7 +26,7 @@
                 <td>{{ produit.description }}</td>
                 <td>{{ produit.prix }}</td>
                 <td>{{ produit.qt }}</td>
-                <td>{{ produit.categorie }}</td>
+                <td>{{ produit.categorie.libelle }}</td>
                 <td>
                     <a href="{{ path('app_produit_show', {'id': produit.id}) }}" class="btn btn-info">show</a>
                     <a href="{{ path('app_produit_edit', {'id': produit.id}) }}" class="btn btn-success">edit</a>

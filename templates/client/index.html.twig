@@ -27,7 +27,7 @@
                 <td>{{ client.tel }}</td>
                 <td>{{ client.mail }}</td>
                 <td>{{ client.adr }}</td>
-                <td>{{ client.user }}</td>
+                <td>{{ client.user.login }}</td>
                 <td>
                     <a href="{{ path('app_client_show', {'id': client.id}) }}" class="btn btn-info">show</a>
                     <a href="{{ path('app_client_edit', {'id': client.id}) }}" class="btn btn-success">edit</a>
