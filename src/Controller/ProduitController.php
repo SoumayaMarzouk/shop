@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Produit;
+use App\Entity\LigneCommande;
 use App\Form\ProduitType;
-use App\Form\SearchType;
+use App\Form\LigneCommandeType;
 use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -98,4 +99,6 @@ class ProduitController extends AbstractController
 
         return $this->redirectToRoute('app_produit_index', [], Response::HTTP_SEE_OTHER);
     }
+
+
 }

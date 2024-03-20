@@ -81,7 +81,7 @@ class LigneCommandeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_ligne_commande_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_commande_show', ['id' => $ligneCommande->getCommande()->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('ligne_commande/edit.html.twig', [

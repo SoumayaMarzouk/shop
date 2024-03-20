@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LigneCommande{% endblock %}
+
+{% block body %}
+    <h1>Ajout au panier de {{produit.libelle}}</h1>
+<div class="container">
+    {{ form_start(form) }}
+        {{ form_row(form.qt) }}
+        {{ form_row(form._token) }}
+        <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    {{ form_end(form, {render_rest: false}) }}
+
+    <a href="{{ path('app_produit_index') }}" class="btn btn-primary">Back</a>
+    </div>
+{% endblock %}
